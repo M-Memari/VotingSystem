@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using static System.Console;
 
 namespace SandBox
 {
     public class BallotBox
     {
-        public BallotBox(ICollection<Counter> counters)
+        public BallotBox(IEnumerable<Counter> counters)
         {
             Counters = new List<Counter>();
             Counters.AddRange(counters);
@@ -15,7 +15,7 @@ namespace SandBox
         private List<Counter> Counters { get; }
 
         public int Total() => Counters.Sum(x => x.Count);
-
+        //If there is a tie at the top, we want to make sure we get them all in GetWinner()
         public IEnumerable<Counter> GetWinner()
         {
             var winner = Counters
@@ -28,15 +28,16 @@ namespace SandBox
         public void ReportResults()
         {
             var sortedList = Counters.OrderByDescending(x => x);
-            Console.WriteLine($"Total votes: {Total()}");
-            foreach (Counter counter in sortedList)
+            WriteLine($"Total votes: {Total()}");
+            foreach (var counter in sortedList)
             {
-                Console.WriteLine($"{counter.ToString()}: {counter.GetPercent(Total()):F}%");
+                WriteLine($"{counter}: {counter.GetPercent(Total()):F}%");
             }
-            Console.WriteLine(",therefore the winner/winners is/are:");
-            foreach (Counter counter1 in GetWinner())
+
+            WriteLine(GetWinner().ToList().Count == 1 ? "The winner is:" : "The winners are:");
+            foreach (var counter1 in GetWinner())
             {
-                Console.WriteLine(counter1.ToString());
+                WriteLine(counter1.Name);
             }
 
         }

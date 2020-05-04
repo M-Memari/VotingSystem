@@ -14,7 +14,7 @@ namespace SandBox
             //--------------------------------------------
             var myList = new List<Counter>()
             {
-                new Counter("yes",324),
+                new Counter("yes",398),
                 new Counter("no",436),
                 new Counter("maybe",436),
             };
