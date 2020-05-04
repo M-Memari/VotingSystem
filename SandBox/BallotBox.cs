@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SandBox
 {
@@ -12,12 +11,10 @@ namespace SandBox
             Counters = new List<Counter>();
             Counters.AddRange(counters);
         }
-        public List<Counter> Counters { get; }
 
-        public int Total()
-        {
-            return Counters.Sum(x => x.Count);
-        }
+        private List<Counter> Counters { get; }
+
+        public int Total() => Counters.Sum(x => x.Count);
 
         public IEnumerable<Counter> GetWinner()
         {
@@ -26,6 +23,22 @@ namespace SandBox
                 .OrderByDescending(x => x.Key)
                 .FirstOrDefault();
             return winner;
+        }
+
+        public void ReportResults()
+        {
+            var sortedList = Counters.OrderByDescending(x => x);
+            Console.WriteLine($"Total votes: {Total()}");
+            foreach (Counter counter in sortedList)
+            {
+                Console.WriteLine($"{counter.ToString()}: {counter.GetPercent(Total()):F}%");
+            }
+            Console.WriteLine(",therefore the winner/winners is/are:");
+            foreach (Counter counter1 in GetWinner())
+            {
+                Console.WriteLine(counter1.ToString());
+            }
+
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SandBox
 {
@@ -16,19 +15,11 @@ namespace SandBox
             var myList = new List<Counter>()
             {
                 new Counter("yes",324),
-                new Counter("no",432),
+                new Counter("no",436),
                 new Counter("maybe",436),
-                new Counter("sdfe",436),
-                new Counter("mdsfe",436),
-                new Counter("dSFdf",436),
-                new Counter("dsfdSF",436)
-
             };
             var myBallot = new BallotBox(myList);
-            foreach (Counter counter in myBallot.GetWinner())
-            {
-                Console.WriteLine($"{counter.ToString()}: {counter.GetPercent(myBallot.Total()):F}%");
-            }
+            myBallot.ReportResults();
         }
 
         //private static void CalculatePercentage(IDictionary<string, int> ballot)

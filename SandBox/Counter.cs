@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SandBox
 {
@@ -12,7 +10,7 @@ namespace SandBox
             Count = count;
         }
         public string Name { get; }
-        public int Count { get; }
+        public int Count { get; private set; }
 
         public double GetPercent(int total)
         {
@@ -32,5 +30,7 @@ namespace SandBox
         {
             return $"{Name}: {Count} votes";
         }
+
+        public void Increment() => Count++;
     }
 }
